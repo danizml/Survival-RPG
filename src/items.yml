@@ -1,0 +1,9 @@
+Fly-Feather:
+  enabled: true
+  name: "&l&fFly Feather"
+  lore:
+    - "&2}--------------+--------------{"
+    - "&8Enable or disable fly on click."
+    - "&2}--------------+--------------{"
+  message: "&2You has active fly for 30 seconds"
+  time: 30
