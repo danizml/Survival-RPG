@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,12 +32,12 @@ public class PrimaryCommand implements CommandExecutor {
                 if (sender.hasPermission("survivalrpg.reload")) {
                     this.plugin.reloadPlugin();
                     this.plugin.registerConfig();
+                    sender.sendMessage(ChatColor.GREEN + "Config Reloaded");
                 }
             } else if (args[0].equalsIgnoreCase("help")) {
                 if (sender.hasPermission("survivalrpg.help")) {
                     sender.sendMessage(ChatColor.DARK_GREEN + "-----<" + this.plugin.name + ChatColor.DARK_RED + "Help" + ChatColor.DARK_GREEN + ">-----");
                     sender.sendMessage(ChatColor.GOLD + "/rpg item <type> give <player> <amount> ");
-                    sender.sendMessage(ChatColor.GOLD + "/rpg potion <type> give <player> <amount> ");
                     sender.sendMessage(ChatColor.GOLD + "/rpg version ");
                     sender.sendMessage(ChatColor.GOLD + "/rpg help ");
                     sender.sendMessage(ChatColor.GOLD + "/fly <ON/OFF> <--[optional]");
@@ -74,10 +75,11 @@ public class PrimaryCommand implements CommandExecutor {
                         } else {
                             ItemStack item = new ItemStack(Material.BOW, amount);
                             ItemMeta meta = item.getItemMeta();
-                            Objects.requireNonNull(meta).setDisplayName(ChatColor.DARK_PURPLE + "Teleport Bow");
+                            Objects.requireNonNull(meta).setDisplayName(ChatColor.DARK_PURPLE + "TP_Bow");
                             ArrayList<String> lore = new ArrayList<>();
                             lore.add("This bow can teleport you");
                             lore.add("where the arrow falls");
+                            item.addEnchantment(Enchantment.MENDING, 0);
                             item.setItemMeta(meta);
                             meta.setLore(lore);
                             target.getInventory().addItem(item);
