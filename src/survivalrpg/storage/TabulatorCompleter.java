@@ -41,8 +41,13 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
                 argList.add("give");
                 return argList;
             }
+
             if (args.length == 3 && (args[1].equals("tpbow"))) {
                 argList.add("give");
+                return argList;
+            }
+            if (args.length == 5 && (args[4].equals("1"))) {
+                argList.add("danizml");
                 return argList;
             }
             if (args.length == 4 && (args[2].equals("give"))) {
