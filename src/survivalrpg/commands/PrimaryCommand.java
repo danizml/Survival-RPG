@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -39,7 +40,6 @@ public class PrimaryCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.GOLD + "/rpg item <type> give <player> <amount> ");
                     sender.sendMessage(ChatColor.GOLD + "/rpg version ");
                     sender.sendMessage(ChatColor.GOLD + "/rpg help ");
-                    sender.sendMessage(ChatColor.GOLD + "/fly <ON/OFF> <--[optional]");
                     sender.sendMessage(ChatColor.DARK_GREEN + "-----<" + this.plugin.name + ChatColor.DARK_RED + "Help" + ChatColor.DARK_GREEN + ">-----");
                 }
             } else if (args[0].equalsIgnoreCase("version")) {
@@ -76,6 +76,7 @@ public class PrimaryCommand implements CommandExecutor {
                             ItemMeta meta = item.getItemMeta();
                             Objects.requireNonNull(meta).setDisplayName(ChatColor.DARK_PURPLE + "TP_Bow");
                             ArrayList<String> lore = new ArrayList<>();
+                            item.addEnchantment(Enchantment.MENDING, 1);
                             lore.add("This bow can teleport you");
                             lore.add("where the arrow falls");
                             item.setItemMeta(meta);
