@@ -79,9 +79,9 @@ public class PrimaryCommand implements CommandExecutor {
                             ArrayList<String> lore = new ArrayList<>();
                             lore.add("This bow can teleport you");
                             lore.add("where the arrow falls");
-                            item.addEnchantment(Enchantment.MENDING, 1);
                             item.setItemMeta(meta);
                             meta.setLore(lore);
+                            item.addEnchantment(Enchantment.MENDING, 1);
                             target.getInventory().addItem(item);
                         }
                     } else {
