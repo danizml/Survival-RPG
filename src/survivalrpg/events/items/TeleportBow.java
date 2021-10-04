@@ -17,7 +17,7 @@ public class TeleportBow implements Listener {
 
     @EventHandler
     public void onBowShoot(ProjectileHitEvent e) {
-        if (e.getEntity() instanceof Arrow) {
+        if (e.getEntity() instanceof Arrow ) {
             Player playershoot = (Player) e.getEntity().getShooter();
             int pitch = (int) Objects.requireNonNull(playershoot).getLocation().getPitch();
             int yaw = (int) playershoot.getLocation().getYaw();
