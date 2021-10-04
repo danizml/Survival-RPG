@@ -29,6 +29,7 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
                 argList.add("help");
                 argList.add("version");
                 argList.add("item");
+                argList.add("fly");
                 return argList.stream().filter(a -> a.startsWith(args[0])).collect(Collectors.toList());
             }
             if (args.length == 2 && (args[0].equals("item"))) {
