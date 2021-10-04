@@ -1,6 +1,7 @@
 package survivalrpg.storage;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,9 +47,10 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
                 argList.add("give");
                 return argList;
             }
-            if (args.length == 5 && (args[4].equals("1"))) {
-                argList.add("danizml");
-                return argList;
+            if (args.length == 5 && args[1].equals("1") || args[1].equals("2") || args[1].equals("3") || args[1].equals("4")) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    argList.add(player.getName());
+                }return argList;
             }
             if (args.length == 4 && (args[2].equals("give"))) {
                 argList.add("1");

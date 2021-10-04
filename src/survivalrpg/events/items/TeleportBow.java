@@ -25,7 +25,7 @@ public class TeleportBow implements Listener {
             int y = e.getEntity().getLocation().getBlockY();
             int z = e.getEntity().getLocation().getBlockZ();
             Location location = new Location(playershoot.getWorld(), x, y, z, yaw, pitch);
-            if (Objects.requireNonNull(playershoot.getItemInHand().getItemMeta()).getDisplayName().equals(ChatColor.DARK_PURPLE + "Teleport Bow")) {
+            if (Objects.requireNonNull(playershoot.getItemInHand().getItemMeta()).getDisplayName().equals(ChatColor.DARK_PURPLE + "TP_Bow")) {
                 playershoot.teleport(location);
                 e.getEntity().remove();
                 playershoot.spawnParticle(Particle.ENCHANTMENT_TABLE, 10, 10, 10, 10);
