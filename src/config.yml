@@ -1,2 +1,11 @@
 Config:
   Version: 1.0.0
+
+  ItemConfig:
+    name: '&eRecall Potion'
+    custommodeldata: 1
+    lore:
+      - '&7Drink this to return back to the bed'
+      - '&7or to the world spawn point!'
+  General:
+    allow-crafting: true
