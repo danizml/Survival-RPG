@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import survivalrpg.SurvivalRPG;
@@ -78,9 +79,10 @@ public class PrimaryCommand implements CommandExecutor {
                             ArrayList<String> lore = new ArrayList<>();
                             lore.add("This bow can teleport you");
                             lore.add("where the arrow falls");
-                            item.setItemMeta(meta);
                             meta.setLore(lore);
                             item.addEnchantment(Enchantment.DURABILITY, 3);
+                            meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+                            item.setItemMeta(meta);
                             target.getInventory().addItem(item);
                         }
                     } else {
