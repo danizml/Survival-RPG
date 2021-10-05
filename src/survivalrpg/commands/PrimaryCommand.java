@@ -81,7 +81,8 @@ public class PrimaryCommand implements CommandExecutor {
                             lore.add("where the arrow falls");
                             meta.setLore(lore);
                             item.addEnchantment(Enchantment.DURABILITY, 3);
-                            meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+                            meta.setUnbreakable(true);
+                            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                             item.setItemMeta(meta);
                             target.getInventory().addItem(item);
                         }
