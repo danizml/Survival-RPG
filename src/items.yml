@@ -1,3 +1,9 @@
+#   +------------------------+
+#   +      Items Config      +
+#   +------------------------+
+#   In this Config you con change the items attributes for example, If is enable/disable, the name of the item
+#   the lore of an item.
+
 Fly-Feather:
   enabled: true
   name: "&l&fFly Feather"
