@@ -57,10 +57,9 @@ public final class SurvivalRPG extends JavaPlugin {
     //-------------------------------------------------Disable----------------------------------------------------------
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-----------------------{=}-----------------------+");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "The plugin version: " + version + "");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "The plugin " + name + " was Disable");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-----------------------{=}-----------------------+");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+----------------------------------------------+");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+                  See you leter               +");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+----------------------------------------------+");
     }
 
     public void registerConfig() {
