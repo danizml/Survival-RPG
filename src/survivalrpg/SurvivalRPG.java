@@ -44,10 +44,10 @@ public final class SurvivalRPG extends JavaPlugin {
     public void onEnable() {
         this.version = this.pdfFile.getVersion();
         this.name = ChatColor.BLACK + "[" + ChatColor.DARK_RED + this.pdfFile.getName() + ChatColor.BLACK + "]" + ChatColor.WHITE;
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-----------------------{=}-----------------------+");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "The plugin version: " + version + "");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE + "The plugin " + name + " was Enable");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-----------------------{=}-----------------------+");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+     The plugin version: " + version + "         +");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+     The plugin " + name + " was Enable          +");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
         this.registerCommands();
         this.registerMessages();
         this.registerEvents();
