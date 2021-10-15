@@ -10,7 +10,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import survivalrpg.commands.PrimaryCommand;
-import survivalrpg.events.items.Fly;
+import survivalrpg.events.items.FlyFeather;
 import survivalrpg.events.items.TeleportBow;
 import survivalrpg.storage.TabulatorCompleter;
 
@@ -93,7 +93,7 @@ public final class SurvivalRPG extends JavaPlugin {
 
     public void registerEvents() {
         PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new Fly(this),this);
+        pm.registerEvents(new FlyFeather(this),this);
         pm.registerEvents(new TeleportBow(), this);
     }
 
