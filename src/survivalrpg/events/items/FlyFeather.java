@@ -12,10 +12,10 @@ import survivalrpg.SurvivalRPG;
 import java.util.Objects;
 
 @SuppressWarnings({"deprecation", "EqualsBetweenInconvertibleTypes"})
-public class Fly implements Listener {
+public class FlyFeather implements Listener {
     private final SurvivalRPG plugin;
 
-    public Fly(SurvivalRPG plugin) {
+    public FlyFeather(SurvivalRPG plugin) {
         this.plugin = plugin;
     }
 
