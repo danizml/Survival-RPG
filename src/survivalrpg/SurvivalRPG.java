@@ -13,6 +13,10 @@ import survivalrpg.commands.PrimaryCommand;
 import survivalrpg.events.items.FlyFeather;
 import survivalrpg.events.items.TeleportBow;
 import survivalrpg.storage.TabulatorCompleter;
+import survivalrpg.warps.WarpConfig;
+import survivalrpg.warps.delwarp;
+import survivalrpg.warps.setwarp;
+import survivalrpg.warps.warp;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +92,9 @@ public final class SurvivalRPG extends JavaPlugin {
     public void registerCommands() {
         Objects.requireNonNull(this.getCommand("rpg")).setExecutor(new PrimaryCommand(this));
         Objects.requireNonNull(this.getCommand("rpg")).setTabCompleter(new TabulatorCompleter());
+        Objects.requireNonNull(this.getCommand("delwarp")).setExecutor(new delwarp());
+        Objects.requireNonNull(this.getCommand("warp")).setExecutor(new warp());
+        Objects.requireNonNull(this.getCommand("setwarp")).setExecutor(new setwarp());
     }
 
     public void registerEvents() {
