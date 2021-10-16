@@ -1,7 +1,6 @@
 package survivalrpg.warps;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,42 +11,42 @@ import javax.annotation.Nonnull;
 
 public class setwarp implements CommandExecutor {
 
-    public final SurvivalRPG plugin;
+    private final SurvivalRPG plugin;
 
     public setwarp(SurvivalRPG plugin) {
         this.plugin = plugin;
     }
 
-    public boolean onCommand(@Nonnull CommandSender commandSender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
-        if (!(commandSender instanceof Player)) {
-            commandSender.sendMessage("[c] Player only command!");
-        }
+    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("[rpg] Player only command!");
+        } else {
+            Player player = (Player) sender;
 
-        Player p = (Player) commandSender;
-        if (p.hasPermission("survivalrpg.warp.setwarp")) {
-            p.sendMessage(ChatColor.GREEN + ("[c] You don`t have enough permission!"));
-        }
+            if (!player.hasPermission("survivalrpg.warp.setwarp")) {
+                player.sendMessage(ChatColor.RED + ("[rpg] You don't have enough permissions!"));
+            }
 
-        if (strings.length == 0) {
+            if (strings.length == 0) {
+                player.sendMessage(ChatColor.BLUE + ("[rpg] You need to give me a name"));
+            }
 
-            p.sendMessage(ChatColor.GRAY + ("[c] You need to give me a name"));
-        }
+            String name = strings[0].toLowerCase();
 
-        String name =strings[0].toLowerCase();
-        if (plugin.getConfig().get(name) != null) {
-            p.sendMessage(ChatColor.RED + ("[c] There is already a warp whit that name!"));
-        }
+            if (plugin.getConfig().get(name) != null) {
+                player.sendMessage(ChatColor.RED + ("[rpg] There is already a warp whit that name!"));
+            }
 
-        Location loc =p.getLocation();
-        plugin.getConfig().set(name + ".Word",loc.getWorld().toString());
-        plugin.getConfig().set(name + ".X",  loc.getX());
-        plugin.getConfig().set(name + ".Y", loc.getY());
-        plugin.getConfig().set(name + ".Z", loc.getZ());
-        plugin.getConfig().set(name + ".Pitch", loc.getPitch());
-        plugin.getConfig().set(name + ".Yaw", loc.getYaw());
-        plugin.saveConfig();
-        p.sendMessage(ChatColor.GREEN + ("[c] Warp place"));
+            plugin.getConfig().set(name + ".World", player.getWorld().getName());
+            plugin.getConfig().set(name + ".X", player.getLocation().getX());
+            plugin.getConfig().set(name + ".Y", player.getLocation().getY());
+            plugin.getConfig().set(name + ".Z", player.getLocation().getZ());
+            plugin.getConfig().set(name + ".Pitch", player.getLocation().getPitch());
+            plugin.getConfig().set(name + ".Yaw", player.getLocation().getYaw());
+            plugin.saveConfig();
+            plugin.reloadConfig();
+            player.sendMessage(ChatColor.GREEN + ("[rpg] Warp place"));
 
-        return true;
+        }return true;
     }
 }
