@@ -23,9 +23,7 @@ public class setwarp implements CommandExecutor {
         } else {
             Player player = (Player) sender;
 
-            if (!player.hasPermission("survivalrpg.warp.setwarp")) {
-                player.sendMessage(ChatColor.RED + ("[rpg] You don't have enough permissions!"));
-            }
+            if (player.hasPermission("survivalrpg.warp.setwarp")) {
 
             if (strings.length == 0) {
                 player.sendMessage(ChatColor.BLUE + ("[RPG] You need to give me a name"));
@@ -45,8 +43,10 @@ public class setwarp implements CommandExecutor {
             plugin.getConfig().set(name + ".Yaw", player.getLocation().getYaw());
             plugin.saveConfig();
             plugin.reloadConfig();
-            player.sendMessage(ChatColor.GREEN + ("[rpg] Warp place"));
-
+            player.sendMessage(ChatColor.GREEN + ("[RPG] Warp place"));
+            } else {
+                sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
+            }
         }return true;
     }
 }
