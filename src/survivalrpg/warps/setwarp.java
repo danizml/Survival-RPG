@@ -9,13 +9,6 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 
 public class setwarp implements CommandExecutor {
-
-    private final SurvivalRPG plugin;
-
-    public setwarp(SurvivalRPG plugin) {
-        this.plugin = plugin;
-    }
-
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
         if (!(sender instanceof Player)) {
             sender.sendMessage("[RPG] Player only command!");
@@ -30,18 +23,18 @@ public class setwarp implements CommandExecutor {
 
             String name = strings[0].toLowerCase();
 
-            if (plugin.getConfig().get(name) != null) {
+            if (WarpConfig.getWarps().get(name) != null) {
                 player.sendMessage(ChatColor.RED + ("[RPG] There is already a warp whit that name!"));
             }
 
-            plugin.getConfig().set(name + ".World", player.getWorld().getName());
-            plugin.getConfig().set(name + ".X", player.getLocation().getX());
-            plugin.getConfig().set(name + ".Y", player.getLocation().getY());
-            plugin.getConfig().set(name + ".Z", player.getLocation().getZ());
-            plugin.getConfig().set(name + ".Pitch", player.getLocation().getPitch());
-            plugin.getConfig().set(name + ".Yaw", player.getLocation().getYaw());
-            plugin.saveConfig();
-            plugin.reloadConfig();
+                WarpConfig.getWarps().set(name + ".World", player.getWorld().getName());
+                WarpConfig.getWarps().set(name + ".X", player.getLocation().getX());
+                WarpConfig.getWarps().set(name + ".Y", player.getLocation().getY());
+                WarpConfig.getWarps().set(name + ".Z", player.getLocation().getZ());
+                WarpConfig.getWarps().set(name + ".Pitch", player.getLocation().getPitch());
+                WarpConfig.getWarps().set(name + ".Yaw", player.getLocation().getYaw());
+                WarpConfig.saveWarps();
+                WarpConfig.reloadWarps();
             player.sendMessage(ChatColor.GREEN + ("[RPG] Warp place"));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));

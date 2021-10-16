@@ -5,18 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import survivalrpg.SurvivalRPG;
 
 import javax.annotation.Nonnull;
 
 public class delwarp implements CommandExecutor {
-
-    private final SurvivalRPG plugin;
-
-    public delwarp(SurvivalRPG plugin) {
-        this.plugin = plugin;
-    }
-
 
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
@@ -31,14 +23,15 @@ public class delwarp implements CommandExecutor {
                 }
 
                 String name = strings[0].toLowerCase();
-                if (plugin.getConfig().get(name) == null) {
+
+                if (WarpConfig.getWarps().get(name) == null) {
                     player.sendMessage(ChatColor.RED + ("[RPG] There is no warp with this name!"));
                 }
 
-                plugin.getConfig().set(name, null);
-                plugin.saveConfig();
+                WarpConfig.getWarps().set(name, null);
+                WarpConfig.saveWarps();
+                WarpConfig.reloadWarps();
                 player.sendMessage(ChatColor.GREEN + ("[RPG] Warp" + name + "asuccessfully deleted!"));
-
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
             }

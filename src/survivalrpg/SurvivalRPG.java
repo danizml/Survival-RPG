@@ -31,6 +31,8 @@ import static survivalrpg.storage.LoggerMessage.log;
 //----------------------------------------------------------------------------------------------------------------------
 
 public final class SurvivalRPG extends JavaPlugin {
+    public static SurvivalRPG plugin;
+
 
     File configFile = new File(this.getDataFolder(), "config.yml");
     PluginDescriptionFile pdfFile = this.getDescription();
@@ -46,6 +48,7 @@ public final class SurvivalRPG extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        WarpConfig.registerWarps();
         this.version = this.pdfFile.getVersion();
         this.name = ChatColor.BLACK + "[" + ChatColor.DARK_RED + this.pdfFile.getName() + ChatColor.BLACK + "]" + ChatColor.WHITE;
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
@@ -110,6 +113,7 @@ public final class SurvivalRPG extends JavaPlugin {
 
         return this.messages;
     }
+
     public void reloadMessages() {
         if (this.messages == null) {
             this.messagesFile = new File(this.getDataFolder(), "messages.yml");
@@ -120,6 +124,7 @@ public final class SurvivalRPG extends JavaPlugin {
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
         this.messages.setDefaults(defConfig);
     }
+
     public void saveMessages() {
         try {
             this.messages.save(this.messagesFile);
@@ -127,6 +132,7 @@ public final class SurvivalRPG extends JavaPlugin {
             var2.printStackTrace();
         }
     }
+
     public void registerMessages() {
         this.messagesFile = new File(this.getDataFolder(), "messages.yml");
         if (!this.messagesFile.exists()) {
@@ -134,6 +140,7 @@ public final class SurvivalRPG extends JavaPlugin {
             this.saveMessages();
         }
     }
+
     public FileConfiguration getItems() {
         if (this.item == null) {
             this.reloadItems();

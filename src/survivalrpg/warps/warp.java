@@ -14,12 +14,6 @@ import java.util.Objects;
 @SuppressWarnings("ConstantConditions")
 public class warp implements CommandExecutor {
 
-    private final SurvivalRPG plugin;
-
-    public warp (SurvivalRPG plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
         if (sender instanceof Player) {
@@ -33,11 +27,11 @@ public class warp implements CommandExecutor {
                 }
 
                 String name = strings[0].toLowerCase();
-                if (plugin.getConfig().get(name) == null) {
+                if (WarpConfig.getWarps().get(name) == null) {
                     sender.sendMessage(ChatColor.RED + ("[RPG] No warp with that name!"));
                 }
 
-                player.teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(plugin.getConfig().getString(name + ".World"))), plugin.getConfig().getDouble(name + ".X"), plugin.getConfig().getDouble(name + ".Y"), plugin.getConfig().getDouble(name + ".Z"), (float) plugin.getConfig().getDouble(name + ".Yaw"), (float) plugin.getConfig().getDouble(name + ".Pitch")));
+                player.teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(WarpConfig.getWarps().getString(name + ".World"))), WarpConfig.getWarps().getDouble(name + ".X"), WarpConfig.getWarps().getDouble(name + ".Y"), WarpConfig.getWarps().getDouble(name + ".Z"), (float) WarpConfig.getWarps().getDouble(name + ".Yaw"), (float) WarpConfig.getWarps().getDouble(name + ".Pitch")));
                 sender.sendMessage(ChatColor.DARK_BLUE + ("[RPG] Teleporting to " + name));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
