@@ -1,10 +1,16 @@
 name: Survival-RPG
 version: 1.0.0
 description: This plugin add some things like a RPG mod
-authors: [danizml]
+author: danizml
 
 main: survivalrpg.SurvivalRPG
 
 commands:
   rpg:
     description: Primary command.
+  warp:
+    description: Warps for player.
+  setwarp:
+    description: Set a warp.
+  delwarp:
+    description: Remove a warp.
