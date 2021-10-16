@@ -19,7 +19,7 @@ public class setwarp implements CommandExecutor {
 
     public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String s, @Nonnull String[] strings) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("[rpg] Player only command!");
+            sender.sendMessage("[RPG] Player only command!");
         } else {
             Player player = (Player) sender;
 
@@ -28,13 +28,13 @@ public class setwarp implements CommandExecutor {
             }
 
             if (strings.length == 0) {
-                player.sendMessage(ChatColor.BLUE + ("[rpg] You need to give me a name"));
+                player.sendMessage(ChatColor.BLUE + ("[RPG] You need to give me a name"));
             }
 
             String name = strings[0].toLowerCase();
 
             if (plugin.getConfig().get(name) != null) {
-                player.sendMessage(ChatColor.RED + ("[rpg] There is already a warp whit that name!"));
+                player.sendMessage(ChatColor.RED + ("[RPG] There is already a warp whit that name!"));
             }
 
             plugin.getConfig().set(name + ".World", player.getWorld().getName());
