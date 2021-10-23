@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import survivalrpg.SurvivalRPG;
 
 import javax.annotation.Nonnull;
 
@@ -23,18 +24,18 @@ public class setwarp implements CommandExecutor {
 
             String name = strings[0].toLowerCase();
 
-            if (WarpConfig.getWarps().get(name) != null) {
+            if (SurvivalRPG.plugin.getWarps().get(name) != null) {
                 player.sendMessage(ChatColor.RED + ("[RPG] There is already a warp whit that name!"));
             }
 
-                WarpConfig.getWarps().set(name + ".World", player.getWorld().getName());
-                WarpConfig.getWarps().set(name + ".X", player.getLocation().getX());
-                WarpConfig.getWarps().set(name + ".Y", player.getLocation().getY());
-                WarpConfig.getWarps().set(name + ".Z", player.getLocation().getZ());
-                WarpConfig.getWarps().set(name + ".Pitch", player.getLocation().getPitch());
-                WarpConfig.getWarps().set(name + ".Yaw", player.getLocation().getYaw());
-                WarpConfig.saveWarps();
-                WarpConfig.reloadWarps();
+                SurvivalRPG.plugin.getWarps().set(name + ".World", player.getWorld().getName());
+                SurvivalRPG.plugin.getWarps().set(name + ".X", player.getLocation().getX());
+                SurvivalRPG.plugin.getWarps().set(name + ".Y", player.getLocation().getY());
+                SurvivalRPG.plugin.getWarps().set(name + ".Z", player.getLocation().getZ());
+                SurvivalRPG.plugin.getWarps().set(name + ".Pitch", player.getLocation().getPitch());
+                SurvivalRPG.plugin.getWarps().set(name + ".Yaw", player.getLocation().getYaw());
+                SurvivalRPG.plugin.saveWarps();
+                SurvivalRPG.plugin.reloadWarps();
             player.sendMessage(ChatColor.GREEN + ("[RPG] Warp place"));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
