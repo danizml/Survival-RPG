@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import survivalrpg.SurvivalRPG;
 
 import javax.annotation.Nonnull;
 
@@ -24,13 +25,13 @@ public class delwarp implements CommandExecutor {
 
                 String name = strings[0].toLowerCase();
 
-                if (WarpConfig.getWarps().get(name) == null) {
+                if (SurvivalRPG.plugin.getWarps().get(name) == null) {
                     player.sendMessage(ChatColor.RED + ("[RPG] There is no warp with this name!"));
                 }
 
-                WarpConfig.getWarps().set(name, null);
-                WarpConfig.saveWarps();
-                WarpConfig.reloadWarps();
+                SurvivalRPG.plugin.getWarps().set(name, null);
+                SurvivalRPG.plugin.saveWarps();
+                SurvivalRPG.plugin.reloadWarps();
                 player.sendMessage(ChatColor.GREEN + ("[RPG] Warp" + name + "asuccessfully deleted!"));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
