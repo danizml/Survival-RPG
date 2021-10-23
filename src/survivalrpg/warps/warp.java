@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import survivalrpg.SurvivalRPG;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -27,11 +28,11 @@ public class warp implements CommandExecutor {
                 }
 
                 String name = strings[0].toLowerCase();
-                if (WarpConfig.getWarps().get(name) == null) {
+                if (SurvivalRPG.plugin.getWarps().get(name) == null) {
                     sender.sendMessage(ChatColor.RED + ("[RPG] No warp with that name!"));
                 }
 
-                player.teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(WarpConfig.getWarps().getString(name + ".World"))), WarpConfig.getWarps().getDouble(name + ".X"), WarpConfig.getWarps().getDouble(name + ".Y"), WarpConfig.getWarps().getDouble(name + ".Z"), (float) WarpConfig.getWarps().getDouble(name + ".Yaw"), (float) WarpConfig.getWarps().getDouble(name + ".Pitch")));
+                player.teleport(new Location(Bukkit.getWorld(Objects.requireNonNull(SurvivalRPG.plugin.getWarps().getString(name + ".World"))), SurvivalRPG.plugin.getWarps().getDouble(name + ".X"), SurvivalRPG.plugin.getWarps().getDouble(name + ".Y"), SurvivalRPG.plugin.getWarps().getDouble(name + ".Z"), (float) SurvivalRPG.plugin.getWarps().getDouble(name + ".Yaw"), (float) SurvivalRPG.plugin.getWarps().getDouble(name + ".Pitch")));
                 sender.sendMessage(ChatColor.DARK_BLUE + ("[RPG] Teleporting to " + name));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
