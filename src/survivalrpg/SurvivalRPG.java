@@ -13,7 +13,6 @@ import survivalrpg.commands.PrimaryCommand;
 import survivalrpg.events.items.FlyFeather;
 import survivalrpg.events.items.TeleportBow;
 import survivalrpg.storage.TabulatorCompleter;
-import survivalrpg.warps.WarpConfig;
 import survivalrpg.warps.delwarp;
 import survivalrpg.warps.setwarp;
 import survivalrpg.warps.warp;
