@@ -31,13 +31,13 @@ import static survivalrpg.storage.LoggerMessage.log;
 
 public final class SurvivalRPG extends JavaPlugin {
     public static SurvivalRPG plugin;
-
-
     File configFile = new File(this.getDataFolder(), "config.yml");
     PluginDescriptionFile pdfFile = this.getDescription();
     private FileConfiguration messages = null;
     private FileConfiguration item = null;
     private File messagesFile = null;
+    private FileConfiguration warps = null;
+    private File warpsFile = null;
     private File itemFile = null;
     public String rutaConfig;
     public String version;
@@ -47,7 +47,6 @@ public final class SurvivalRPG extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        WarpConfig.registerWarps();
         this.version = this.pdfFile.getVersion();
         this.name = ChatColor.BLACK + "[" + ChatColor.DARK_RED + this.pdfFile.getName() + ChatColor.BLACK + "]" + ChatColor.WHITE;
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
@@ -55,6 +54,7 @@ public final class SurvivalRPG extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+     The plugin " + name + " was Enable          +");
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
         this.registerCommands();
+        this.registerWarps();
         this.registerMessages();
         this.registerEvents();
         this.registerItems();
@@ -167,6 +167,38 @@ public final class SurvivalRPG extends JavaPlugin {
     public void registerItems() {
         this.itemFile = new File(this.getDataFolder(), "items.yml");
         if (!this.itemFile.exists()) {
+            this.getItems().options().copyDefaults(true);
+            this.saveItems();
+        }
+    }
+
+    public FileConfiguration getWarps() {
+        if (this.warps == null) {
+            this.reloadItems();
+        }
+
+        return this.warps;
+    }
+    public void reloadWarps() {
+        if (this.warps == null) {
+            this.warpsFile = new File(this.getDataFolder(), "warps.yml");
+        }
+
+        this.warps = YamlConfiguration.loadConfiguration(this.warpsFile);
+        Reader defConfigStream = new InputStreamReader((Objects.requireNonNull(this.getResource("warps.yml"))), StandardCharsets.UTF_8);
+        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+        this.warps.setDefaults(defConfig);
+    }
+    public void saveWarps() {
+        try {
+            this.warps.save(this.warpsFile);
+        } catch (IOException var2) {
+            var2.printStackTrace();
+        }
+    }
+    public void registerWarps() {
+        this.warpsFile = new File(this.getDataFolder(), "warps.yml");
+        if (!this.warpsFile.exists()) {
             this.getItems().options().copyDefaults(true);
             this.saveItems();
         }
