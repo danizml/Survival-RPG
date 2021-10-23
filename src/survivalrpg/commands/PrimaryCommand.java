@@ -91,6 +91,9 @@ public class PrimaryCommand implements CommandExecutor {
                     }
                 }
 //----------------------------------------------------------------------------------------------------------------------
+            } else if (args[0].equalsIgnoreCase("menu")) {
+                Player player= (Player) sender;
+                p
             }
         }return true;
     }
