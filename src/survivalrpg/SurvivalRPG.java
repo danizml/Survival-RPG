@@ -2,20 +2,14 @@ package survivalrpg;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import survivalrpg.commands.PrimaryCommand;
-import survivalrpg.events.items.FlyFeather;
-import survivalrpg.events.items.TeleportBow;
-import survivalrpg.storage.TabulatorCompleter;
-import survivalrpg.warps.delwarp;
-import survivalrpg.warps.setwarp;
-import survivalrpg.warps.warp;
+import survivalrpg.manager.EconomyManager;
+import survivalrpg.manager.RegisterManager;
+import survivalrpg.manager.UnregisterManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,11 +17,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-
-import static survivalrpg.storage.LoggerMessage.LogLevel;
-import static survivalrpg.storage.LoggerMessage.log;
-
-//----------------------------------------------------------------------------------------------------------------------
 
 public final class SurvivalRPG extends JavaPlugin {
     public static SurvivalRPG plugin;
