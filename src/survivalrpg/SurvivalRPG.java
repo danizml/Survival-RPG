@@ -1,7 +1,5 @@
 package survivalrpg;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,177 +17,143 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public final class SurvivalRPG extends JavaPlugin {
-    public static SurvivalRPG plugin;
-    File configFile = new File(this.getDataFolder(), "config.yml");
-    PluginDescriptionFile pdfFile = this.getDescription();
     private FileConfiguration messages = null;
     private FileConfiguration item = null;
     private File messagesFile = null;
     private FileConfiguration warps = null;
     private File warpsFile = null;
     private File itemFile = null;
-    public String rutaConfig;
+    public static String rutaConfig;
+
+    PluginDescriptionFile pdfFile = this.getDescription();
+    private static SurvivalRPG INSTANCE;
+    public static SurvivalRPG plugin;
     public String version;
     public String name;
 
-    //-------------------------------------------------Enable-----------------------------------------------------------
-
     @Override
     public void onEnable() {
-        this.version = this.pdfFile.getVersion();
         this.name = ChatColor.BLACK + "[" + ChatColor.DARK_RED + this.pdfFile.getName() + ChatColor.BLACK + "]" + ChatColor.WHITE;
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+     The plugin version: " + version + "         +");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+     The plugin " + name + " was Enable          +");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+-------------------------------------------------+");
-        this.registerCommands();
-        this.registerWarps();
-        this.registerMessages();
-        this.registerEvents();
-        this.registerItems();
-        this.startPlugin();
+        this.version = this.pdfFile.getVersion();
+        INSTANCE = this;
+        EconomyManager.registerEconomy();
+        RegisterManager.register();
     }
-    //-------------------------------------------------Disable----------------------------------------------------------
+
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+----------------------------------------------+");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.WHITE +      "+                  See you leter               +");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GREEN + "+----------------------------------------------+");
+        UnregisterManager.unregister();
+    }
+
+    public static SurvivalRPG getInstance() {
+        return INSTANCE;
     }
 
     public void registerConfig() {
         File config = new File(this.getDataFolder(), "config.yml");
-        this.rutaConfig = config.getPath();
+        rutaConfig = config.getPath();
         if (!config.exists()) {
             this.getConfig().options().copyDefaults(true);
             this.saveConfig();
         }
     }
 
-    public void startPlugin() {
-        if (this.configFile.exists()) {
-            log(LogLevel.SUCCESS, "Messages.yml has been initialised.");
-            log(LogLevel.SUCCESS, "Config.yml has been initialised.");
-        }
-    }
-
-    public void reloadPlugin() {
-        if (this.configFile.exists()) {
-            log(LogLevel.SUCCESS, "Messages.yml has been reloaded.");
-            log(LogLevel.SUCCESS, "Config.yml has been reloaded.");
-        }
-    }
-
-    public void registerCommands() {
-        Objects.requireNonNull(this.getCommand("rpg")).setExecutor(new PrimaryCommand(this));
-        Objects.requireNonNull(this.getCommand("rpg")).setTabCompleter(new TabulatorCompleter());
-        Objects.requireNonNull(this.getCommand("delwarp")).setExecutor(new delwarp());
-        Objects.requireNonNull(this.getCommand("warp")).setExecutor(new warp());
-        Objects.requireNonNull(this.getCommand("setwarp")).setExecutor(new setwarp());
-    }
-
-    public void registerEvents() {
-        PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new FlyFeather(this),this);
-        pm.registerEvents(new TeleportBow(), this);
-    }
-
     public FileConfiguration getMessages() {
-        if (this.messages == null) {
-            this.reloadMessages();
-        }
-
-        return this.messages;
+        if (messages == null) {
+            reloadMessages();
+        }return messages;
     }
 
     public void reloadMessages() {
-        if (this.messages == null) {
-            this.messagesFile = new File(this.getDataFolder(), "messages.yml");
+        if (messages == null) {
+            messagesFile = new File(this.getDataFolder(), "messages.yml");
         }
 
-        this.messages = YamlConfiguration.loadConfiguration(this.messagesFile);
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
         Reader defConfigStream = new InputStreamReader((Objects.requireNonNull(this.getResource("messages.yml"))), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        this.messages.setDefaults(defConfig);
+        messages.setDefaults(defConfig);
     }
 
     public void saveMessages() {
         try {
-            this.messages.save(this.messagesFile);
+            messages.save(messagesFile);
         } catch (IOException var2) {
             var2.printStackTrace();
         }
     }
 
     public void registerMessages() {
-        this.messagesFile = new File(this.getDataFolder(), "messages.yml");
-        if (!this.messagesFile.exists()) {
-            this.getMessages().options().copyDefaults(true);
-            this.saveMessages();
+        messagesFile = new File(this.getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
+            getMessages().options().copyDefaults(true);
+            saveMessages();
         }
     }
 
     public FileConfiguration getItems() {
-        if (this.item == null) {
-            this.reloadItems();
-        }
-
-        return this.item;
+        if (item == null) {
+            reloadItems();
+        }return item;
     }
+
     public void reloadItems() {
-        if (this.item == null) {
-            this.itemFile = new File(this.getDataFolder(), "items.yml");
+        if (item == null) {
+            itemFile = new File(this.getDataFolder(), "items.yml");
         }
 
-        this.item = YamlConfiguration.loadConfiguration(this.itemFile);
+        item = YamlConfiguration.loadConfiguration(itemFile);
         Reader defConfigStream = new InputStreamReader((Objects.requireNonNull(this.getResource("items.yml"))), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        this.item.setDefaults(defConfig);
+        item.setDefaults(defConfig);
     }
     public void saveItems() {
         try {
-            this.item.save(this.itemFile);
+            item.save(itemFile);
         } catch (IOException var2) {
             var2.printStackTrace();
         }
     }
     public void registerItems() {
-        this.itemFile = new File(this.getDataFolder(), "items.yml");
-        if (!this.itemFile.exists()) {
-            this.getItems().options().copyDefaults(true);
-            this.saveItems();
+        itemFile = new File(this.getDataFolder(), "items.yml");
+        if (!itemFile.exists()) {
+            getItems().options().copyDefaults(true);
+            saveItems();
         }
     }
 
     public FileConfiguration getWarps() {
-        if (this.warps == null) {
-            this.reloadItems();
+        if (warps == null) {
+            reloadItems();
         }
 
-        return this.warps;
+        return warps;
     }
+
     public void reloadWarps() {
-        if (this.warps == null) {
-            this.warpsFile = new File(this.getDataFolder(), "warps.yml");
+        if (warps == null) {
+            warpsFile = new File(this.getDataFolder(), "warps.yml");
         }
 
-        this.warps = YamlConfiguration.loadConfiguration(this.warpsFile);
+        warps = YamlConfiguration.loadConfiguration(warpsFile);
         Reader defConfigStream = new InputStreamReader((Objects.requireNonNull(this.getResource("warps.yml"))), StandardCharsets.UTF_8);
         YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-        this.warps.setDefaults(defConfig);
+        warps.setDefaults(defConfig);
     }
+
     public void saveWarps() {
         try {
-            this.warps.save(this.warpsFile);
+            warps.save(warpsFile);
         } catch (IOException var2) {
             var2.printStackTrace();
         }
     }
+
     public void registerWarps() {
-        this.warpsFile = new File(this.getDataFolder(), "warps.yml");
-        if (!this.warpsFile.exists()) {
-            this.getItems().options().copyDefaults(true);
-            this.saveItems();
+        warpsFile = new File(this.getDataFolder(), "warps.yml");
+        if (!warpsFile.exists()) {
+            getItems().options().copyDefaults(true);
+            saveItems();
         }
     }
 }
