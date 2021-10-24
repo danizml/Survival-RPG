@@ -9,7 +9,20 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import survivalrpg.SurvivalRPG;
 
-@SuppressWarnings({"deprecation", "EqualsBetweenInconvertibleTypes", "ConstantConditions", "PointlessBooleanExpression"})
+import java.util.Objects;
+
+/**
+ *    +FlyFeather+
+ * File created by TonimatasMC
+ * Links:
+ *  - Discord: https://discord.com/invite/VYqEtT36U9
+ *  - GitHub: https://github.com/TonimatasMCDEV
+ *  - SpigotMC: https://www.spigotmc.org/members/tonimatas.803111/
+ *  - CurseForge: https://www.curseforge.com/members/x_tonimatasmc_x/projects
+ *
+ */
+
+@SuppressWarnings({"EqualsBetweenInconvertibleTypes", "deprecation"})
 public class FlyFeather implements Listener {
     private final SurvivalRPG plugin;
 
@@ -22,20 +35,15 @@ public class FlyFeather implements Listener {
         Player player = event.getPlayer();
         if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if (player.getItemInHand().equals(Material.FEATHER)) {
-                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', this.plugin.getItems().getString("Fly-Feather.name")))) {
-                    player.sendMessage(this.plugin.name + ChatColor.DARK_GREEN + " " + this.plugin.getItems().getString("Fly-Feather.message"));
+                if (Objects.requireNonNull(player.getItemInHand().getItemMeta()).getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(SurvivalRPG.getInstance().getItems().getString("Fly-Feather.name"))))) {
+                    player.sendMessage(this.plugin.name + ChatColor.DARK_GREEN + " " + SurvivalRPG.getInstance().getItems().getString("Fly-Feather.message"));
 
-                    if (player.getAllowFlight() == true) {
+                    player.setAllowFlight(true);
+
+                    if (player.getAllowFlight()) {
                         player.setAllowFlight(false);
 
-                    }
-
-                    if (player.getAllowFlight() == false) {
-                        player.setAllowFlight(true);
-                        player.sendMessage(this.plugin.name + ChatColor.DARK_GREEN + "You has been fly enabled");
-                    }
-
-                    player.getItemInHand().setType(Material.PAPER);
+                    }player.getItemInHand().setType(Material.PAPER);
                 }
             }
         }
