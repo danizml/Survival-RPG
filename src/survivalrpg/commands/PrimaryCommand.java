@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import survivalrpg.SurvivalRPG;
+import survivalrpg.manager.MessageManager;
+import survivalrpg.menus.PrimaryMenu;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
