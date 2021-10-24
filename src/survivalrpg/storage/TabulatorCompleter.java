@@ -32,6 +32,8 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
                 argList.add("item");
                 argList.add("fly");
                 argList.add("potion");
+                argList.add("menu");
+                argList.add("economy");
                 return argList.stream().filter(a -> a.startsWith(args[0])).collect(Collectors.toList());
             }
             if (args.length == 2 && (args[0].equals("item"))) {
@@ -45,21 +47,30 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
                 return argList;
             }
 
+            if (args.length == 2 && (args[0].equals("economy"))) {
+                argList.add("give");
+                argList.add("take");
+                argList.add("pay");
+                return argList;
+            }
+
             if (args.length == 3 && (args[1].equals("tpbow"))) {
                 argList.add("give");
                 return argList;
             }
-            if (args.length == 5 && args[1].equals("1") || args[1].equals("2") || args[1].equals("3") || args[1].equals("4")) {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    argList.add(player.getName());
-                }return argList;
-            }
+
             if (args.length == 4 && (args[2].equals("give"))) {
                 argList.add("1");
                 argList.add("2");
                 argList.add("3");
                 argList.add("4");
                 return argList;
+            }
+
+            if (args.length == 5 && args[0].equals("item") || args[0].equals("potion") || args[0].equals("armor")) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    argList.add(player.getName());
+                }return argList;
             }return argList;
         }return null;
     }
