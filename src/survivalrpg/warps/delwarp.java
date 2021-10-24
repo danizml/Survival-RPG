@@ -25,13 +25,13 @@ public class delwarp implements CommandExecutor {
 
                 String name = strings[0].toLowerCase();
 
-                if (SurvivalRPG.plugin.getWarps().get(name) == null) {
+                if (SurvivalRPG.getInstance().getWarps().get(name) == null) {
                     player.sendMessage(ChatColor.RED + ("[RPG] There is no warp with this name!"));
                 }
 
-                SurvivalRPG.plugin.getWarps().set(name, null);
-                SurvivalRPG.plugin.saveWarps();
-                SurvivalRPG.plugin.reloadWarps();
+                SurvivalRPG.getInstance().getWarps().set(name, null);
+                SurvivalRPG.getInstance().saveWarps();
+                SurvivalRPG.getInstance().reloadWarps();
                 player.sendMessage(ChatColor.GREEN + ("[RPG] Warp" + name + "asuccessfully deleted!"));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
