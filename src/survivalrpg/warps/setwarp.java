@@ -24,18 +24,18 @@ public class setwarp implements CommandExecutor {
 
             String name = strings[0].toLowerCase();
 
-            if (SurvivalRPG.plugin.getWarps().get(name) != null) {
+            if (SurvivalRPG.getInstance().getWarps().get(name) != null) {
                 player.sendMessage(ChatColor.RED + ("[RPG] There is already a warp whit that name!"));
             }
 
-                SurvivalRPG.plugin.getWarps().set(name + ".World", player.getWorld().getName());
-                SurvivalRPG.plugin.getWarps().set(name + ".X", player.getLocation().getX());
-                SurvivalRPG.plugin.getWarps().set(name + ".Y", player.getLocation().getY());
-                SurvivalRPG.plugin.getWarps().set(name + ".Z", player.getLocation().getZ());
-                SurvivalRPG.plugin.getWarps().set(name + ".Pitch", player.getLocation().getPitch());
-                SurvivalRPG.plugin.getWarps().set(name + ".Yaw", player.getLocation().getYaw());
-                SurvivalRPG.plugin.saveWarps();
-                SurvivalRPG.plugin.reloadWarps();
+                SurvivalRPG.getInstance().getWarps().set(name + ".World", player.getWorld().getName());
+                SurvivalRPG.getInstance().getWarps().set(name + ".X", player.getLocation().getX());
+                SurvivalRPG.getInstance().getWarps().set(name + ".Y", player.getLocation().getY());
+                SurvivalRPG.getInstance().getWarps().set(name + ".Z", player.getLocation().getZ());
+                SurvivalRPG.getInstance().getWarps().set(name + ".Pitch", player.getLocation().getPitch());
+                SurvivalRPG.getInstance().getWarps().set(name + ".Yaw", player.getLocation().getYaw());
+                SurvivalRPG.getInstance().saveWarps();
+                SurvivalRPG.getInstance().reloadWarps();
             player.sendMessage(ChatColor.GREEN + ("[RPG] Warp place"));
             } else {
                 sender.sendMessage(ChatColor.RED + ("[RPG] You don't have enough permissions!"));
