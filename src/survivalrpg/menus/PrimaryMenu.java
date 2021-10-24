@@ -81,9 +81,9 @@ public class PrimaryMenu implements Listener {
         ItemStack icon10 = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta10 = icon10.getItemMeta();
         assert meta10 != null;
-        meta10.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dNAME"));
+        meta10.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dWarps"));
         List<String> lore10 = new ArrayList<>();
-        lore10.add(ChatColor.translateAlternateColorCodes('&', "&5Description."));
+        lore10.add(ChatColor.translateAlternateColorCodes('&', "&5Click to open the warps menu."));
         meta10.setLore(lore10);
         icon10.setItemMeta(meta10);
         primary.setItem(10, icon10);
@@ -100,9 +100,8 @@ public class PrimaryMenu implements Listener {
         meta19.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dCommands"));
         List<String> lore19 = new ArrayList<>();
         lore19.add(ChatColor.translateAlternateColorCodes('&', "&5Click to show the plugin help."));
-        meta19.hasEnchant(Enchantment.MENDING);
-        meta19.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
         meta19.setLore(lore19);
+        icon19.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
         icon19.setItemMeta(meta19);
         primary.setItem(19, icon19);
 
@@ -112,28 +111,85 @@ public class PrimaryMenu implements Listener {
         primary.setItem(24, new ItemStack(Material.BOOK));
         primary.setItem(25, new ItemStack(Material.BOOK));*/
 
-        ItemStack icon28 = new ItemStack(Material.COMMAND_BLOCK);
+        ItemStack icon28 = new ItemStack(Material.WRITABLE_BOOK);
         ItemMeta meta28 = icon28.getItemMeta();
         assert meta28 != null;
         meta28.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dSettings"));
         List<String> lore28 = new ArrayList<>();
-        lore28.add(ChatColor.translateAlternateColorCodes('&', "&5Click to go the plugins settings."));
-        meta28.hasEnchant(Enchantment.MENDING);
-        meta28.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+        lore28.add(ChatColor.translateAlternateColorCodes('&', "&5Click to go the plugin settings."));
         meta28.setLore(lore28);
         icon28.setItemMeta(meta28);
         primary.setItem(28, icon28);
-
-        primary.setItem(29, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
 
         /*primary.setItem(30, new ItemStack(Material.BOOK));
         primary.setItem(31, new ItemStack(Material.BOOK));
         primary.setItem(32, new ItemStack(Material.BOOK));
         primary.setItem(33, new ItemStack(Material.BOOK));
         primary.setItem(34, new ItemStack(Material.BOOK));*/
+
+        ItemStack icon29 = new ItemStack(Material.BOOK);
+        ItemMeta meta29 = icon29.getItemMeta();
+        assert meta29 != null;
+        meta29.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dComming Soon"));
+        List<String> lore29 = new ArrayList<>();
+        lore29.add(ChatColor.translateAlternateColorCodes('&', "&5Comming Soon."));
+        meta29.setLore(lore29);
+        icon29.setItemMeta(meta29);
+        primary.setItem(37, icon29);
+
+        /*primary.setItem(39, new ItemStack(Material.BOOK));
+        primary.setItem(40, new ItemStack(Material.BOOK));
+        primary.setItem(41, new ItemStack(Material.BOOK));
+        primary.setItem(42, new ItemStack(Material.BOOK));
+        primary.setItem(43, new ItemStack(Material.BOOK));*/
     }
 
     static {
-        primary = Bukkit.createInventory(null, 27, ChatColor.DARK_BLUE + "Survival-RPG");
+        primary = Bukkit.createInventory(null, 54, ChatColor.DARK_BLUE + "Survival-RPG");
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void InventoryClickPrimaryMenu(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+
+        if (event.getInventory().equals(primary)) {
+            event.setCancelled(true);
+
+            if (event.getCurrentItem() == null) {
+                player.sendMessage(ChatColor.DARK_RED + "Error: inventory.item.null");
+            }
+
+            if (event.getCurrentItem().getType() == Material.WRITABLE_BOOK && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dSettings"))) {
+                player.sendMessage("You has been opened the setting menu.");
+            }
+
+            if (event.getCurrentItem().getType() == Material.BARRIER && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dClose menu"))) {
+                player.closeInventory();
+            }
+
+            if (event.getCurrentItem().getType() == Material.COMMAND_BLOCK && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dCommands"))) {
+                HelpMenu.CreateGuiHelp();
+                player.openInventory(HelpMenu.help);
+            }
+
+            if (event.getCurrentItem().getType() == Material.FEATHER && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dFly"))) {
+                if (player.getAllowFlight() == true) {
+                    player.setAllowFlight(false);
+                }
+
+                if (player.getAllowFlight() == false) {
+                    player.setAllowFlight(true);
+                }
+            }
+        }
+    }
+
+    public static void glassPane(int icon) {
+        ItemStack glass = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        ItemMeta glassMeta = glass.getItemMeta();
+        assert glassMeta != null;
+        glassMeta.setDisplayName(". ");
+        glass.setItemMeta(glassMeta);
+        primary.setItem(icon, glass);
     }
 }
