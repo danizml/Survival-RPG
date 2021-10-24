@@ -23,7 +23,6 @@ import java.util.Objects;
 public class PrimaryCommand implements CommandExecutor {
     private final SurvivalRPG plugin;
 
-
     public PrimaryCommand(SurvivalRPG plugin) {
         this.plugin = plugin;
     }
@@ -33,8 +32,8 @@ public class PrimaryCommand implements CommandExecutor {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("reload")) {
                 if (sender.hasPermission("survivalrpg.reload")) {
-                    this.plugin.reloadPlugin();
-                    this.plugin.registerConfig();
+                    MessageManager.reloadPlugin();
+                    SurvivalRPG.getInstance().registerConfig();
                     sender.sendMessage(ChatColor.GREEN + "Config Reloaded");
                 }
             } else if (args[0].equalsIgnoreCase("help")) {
@@ -58,9 +57,9 @@ public class PrimaryCommand implements CommandExecutor {
                         } else {
                             ItemStack item = new ItemStack(Material.FEATHER, amount);
                             ItemMeta itemMeta = item.getItemMeta();
-                            Objects.requireNonNull(itemMeta).setDisplayName(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(this.plugin.getItems().getString("Fly-Feather.name"))));
+                            Objects.requireNonNull(itemMeta).setDisplayName(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(SurvivalRPG.getInstance().getItems().getString("Fly-Feather.name"))));
                             List<String> itemLore = new ArrayList<>();
-                            itemLore.add(ChatColor.translateAlternateColorCodes('&', String.valueOf(this.plugin.getItems().getStringList("Fly-Feather.lore"))));
+                            itemLore.add(ChatColor.translateAlternateColorCodes('&', String.valueOf(SurvivalRPG.getInstance().getItems().getStringList("Fly-Feather.lore"))));
                             itemMeta.setLore(itemLore);
                             item.setItemMeta(itemMeta);
                             target.getInventory().addItem(item);
@@ -77,7 +76,7 @@ public class PrimaryCommand implements CommandExecutor {
                         } else {
                             ItemStack item = new ItemStack(Material.BOW, amount);
                             ItemMeta meta = item.getItemMeta();
-                            Objects.requireNonNull(meta).setDisplayName(ChatColor.DARK_PURPLE + "TP_Bow");
+                            Objects.requireNonNull(meta).setDisplayName(ChatColor.DARK_PURPLE + "TP-Bow");
                             ArrayList<String> lore = new ArrayList<>();
                             lore.add("This bow can teleport you");
                             lore.add("where the arrow falls");
@@ -94,8 +93,9 @@ public class PrimaryCommand implements CommandExecutor {
                 }
 //----------------------------------------------------------------------------------------------------------------------
             } else if (args[0].equalsIgnoreCase("menu")) {
-                Player player= (Player) sender;
-                p
+                Player player = (Player) sender;
+                PrimaryMenu.CreateGuiPrimary();
+                player.openInventory(PrimaryMenu.primary);
             }
         }return true;
     }
