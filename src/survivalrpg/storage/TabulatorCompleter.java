@@ -6,11 +6,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("NullableProblems")
 public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
 
     private boolean hasPermission(CommandSender sender) {
@@ -22,7 +22,7 @@ public class TabulatorCompleter implements org.bukkit.command.TabCompleter {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command cmd, @Nonnull String alias, @Nonnull String[] args) {
         if (cmd.getName().equalsIgnoreCase("rpg")) {
             List<String> argList = new ArrayList<>();
             if (args.length == 1 && hasPermission(sender)) {
