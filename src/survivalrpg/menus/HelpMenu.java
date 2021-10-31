@@ -16,17 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- *    +PrimaryMenu+
- * File created by TonimatasMC
- * Links:
- *  - Discord: https://discord.com/invite/VYqEtT36U9
- *  - GitHub: https://github.com/TonimatasMCDEV
- *  - SpigotMC: https://www.spigotmc.org/members/tonimatas.803111/
- *  - CurseForge: https://www.curseforge.com/members/x_tonimatasmc_x/projects
- *
- */
-
 public class HelpMenu implements Listener {
     public static Inventory help;
 
