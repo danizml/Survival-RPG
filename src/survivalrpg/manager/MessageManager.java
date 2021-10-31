@@ -9,17 +9,6 @@ import java.io.File;
 
 import static survivalrpg.storage.LoggerMessage.log;
 
-/**
- *    +MessageManager+
- * File created by TonimatasMC
- * Links:
- *  - Discord: https://discord.com/invite/VYqEtT36U9
- *  - GitHub: https://github.com/TonimatasMCDEV
- *  - SpigotMC: https://www.spigotmc.org/members/tonimatas.803111/
- *  - CurseForge: https://www.curseforge.com/members/x_tonimatasmc_x/projects
- *
- */
-
 public class MessageManager {
     public static File configFile = new File(SurvivalRPG.getInstance().getDataFolder(), "config.yml");
 
