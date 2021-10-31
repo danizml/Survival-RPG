@@ -21,7 +21,7 @@ public class ItemsMenu implements Listener {
 
     public static void CreateGuiItems() {
 
-//----------------------Panels----------------------//
+//------------------------------------------------------Panels--------------------------------------------------------//
 
         ItemsMenu.glassPane(0);
         ItemsMenu.glassPane(1);
@@ -48,7 +48,17 @@ public class ItemsMenu implements Listener {
         ItemsMenu.glassPane(51);
         ItemsMenu.glassPane(52);
 
-//---------------------Function---------------------//
+        //------------------------------------------------Function----------------------------------------------------//
+
+        ItemStack icon10 = new ItemStack(Material.BOW);
+        ItemMeta meta10 = icon10.getItemMeta();
+        assert meta10 != null;
+        meta10.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&dGive TP-Bow"));
+        List<String> lore10 = new ArrayList<>();
+        lore10.add(ChatColor.translateAlternateColorCodes('&', "&5Click to get the tp-bow"));
+        meta10.setLore(lore10);
+        icon10.setItemMeta(meta10);
+        items.setItem(10, icon10);
 
         ItemStack icon53 = new ItemStack(Material.BARRIER);
         ItemMeta meta53 = icon53.getItemMeta();
