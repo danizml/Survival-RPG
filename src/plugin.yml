@@ -2,7 +2,6 @@ name: Survival-RPG
 version: 1.0.0
 description: This plugin add some things like a RPG mod
 author: danizml
-authors: [danizml - TonimatasMC]
 
 main: survivalrpg.SurvivalRPG
 
