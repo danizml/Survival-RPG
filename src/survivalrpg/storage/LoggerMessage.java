@@ -3,10 +3,6 @@ package survivalrpg.storage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-/**
- * File created by TonimatasMC
- */
-
 public class LoggerMessage {
 
     public LoggerMessage() {
