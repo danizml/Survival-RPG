@@ -17,17 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- *    +PrimaryMenu+
- * File created by TonimatasMC
- * Links:
- *  - Discord: https://discord.com/invite/VYqEtT36U9
- *  - GitHub: https://github.com/TonimatasMCDEV
- *  - SpigotMC: https://www.spigotmc.org/members/tonimatas.803111/
- *  - CurseForge: https://www.curseforge.com/members/x_tonimatasmc_x/projects
- *
- */
-
 @SuppressWarnings("CommentedOutCode")
 public class PrimaryMenu implements Listener {
     public static Inventory primary;
@@ -170,6 +159,11 @@ public class PrimaryMenu implements Listener {
             if (event.getCurrentItem().getType() == Material.COMMAND_BLOCK && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dCommands"))) {
                 HelpMenu.CreateGuiHelp();
                 player.openInventory(HelpMenu.help);
+            }
+
+            if (event.getCurrentItem().getType() == Material.BOOK && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dItems"))) {
+                ItemsMenu.CreateGuiItems();
+                player.openInventory(ItemsMenu.items);
             }
 
             if (event.getCurrentItem().getType() == Material.FEATHER && Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&dFly"))) {
