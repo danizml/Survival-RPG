@@ -11,17 +11,6 @@ import survivalrpg.SurvivalRPG;
 
 import java.util.Objects;
 
-/**
- *    +FlyFeather+
- * File created by TonimatasMC
- * Links:
- *  - Discord: https://discord.com/invite/VYqEtT36U9
- *  - GitHub: https://github.com/TonimatasMCDEV
- *  - SpigotMC: https://www.spigotmc.org/members/tonimatas.803111/
- *  - CurseForge: https://www.curseforge.com/members/x_tonimatasmc_x/projects
- *
- */
-
 @SuppressWarnings({"EqualsBetweenInconvertibleTypes", "deprecation"})
 public class FlyFeather implements Listener {
     private final SurvivalRPG plugin;
