@@ -1,4 +1,6 @@
 package survivalrpg.events.armor;
 
-public class DoubleJumpBoots {
+import org.bukkit.event.Listener;
+
+public class DoubleJumpBoots implements Listener {
 }
