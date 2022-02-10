@@ -1,4 +1,4 @@
 package survivalrpg.events.potions;
 
-public class RecalPotion wdawdaw{
+public class RecalPotion wdawdaww{
 }
