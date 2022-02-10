@@ -1,5 +1,7 @@
 package survivalrpg.manager;
 
+//----------------bukkit-------------//
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import survivalrpg.SurvivalRPG;
 
+//----------------Java---------------//
+
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +21,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+
+//----------------code---------------//
 
 public class EconomyManager implements CommandExecutor, Listener {
     private static FileConfiguration economy = null;

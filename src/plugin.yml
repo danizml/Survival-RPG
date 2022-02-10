@@ -16,3 +16,13 @@ commands:
     description: Set a warp.
   delwarp:
     description: Remove a warp.
+
+permissions:
+  survivalrpg.reload:
+    description: Reload the plugin config
+    default: false
+
+
+  survivalrpg.help:
+    description: Show the plugin help
+    default: false
